@@ -1,0 +1,26 @@
+{
+  "name": "productservice",
+  "version": "1.0.0",
+  "description": "RESTful API written in Node.JS",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "test:watch": "mocha --watch",
+    "start": "node app.js"
+  },
+  "keywords": [
+    "RESTful",
+    "API",
+    "Node"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^9.0.2",
+    "supertest": "^6.1.3"
+  }
+}
