@@ -42,4 +42,24 @@ router.get('/find', (req, res) => {
     });
 });
 
+/**
+ * Update Product
+ */
+router.patch('/', (req, res) => {
+    Product.updateOne({
+        name: req.body.name
+    }, {
+        description: req.body.description,
+        price: req.body.price,
+    }, (err, updateRes) => {
+        if (err) {
+            return res.status(500).json(err);
+        }
+        if (updateRes.nModified < 1) {
+            return res.status(404).json({ message: 'Product not found' });
+        }
+        return res.json(updateRes.nModified);
+    });
+});
+
 module.exports = router;

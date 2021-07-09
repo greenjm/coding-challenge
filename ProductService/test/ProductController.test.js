@@ -113,4 +113,33 @@ describe('ProductController', () => {
                 .catch(err => done(err));
         });
     });
+
+    describe('PATCH /product', () => {
+        it('should update an existing product', (done) => {
+            const product = {
+                name: 'test name',
+                description: 'some description',
+                price: '1.00',
+            };
+            const updatedProduct = {
+                name: 'test name',
+                description: 'some new description',
+                price: '2.00',
+            };
+            mongoose.model('Product').create([
+                product,
+            ]);
+
+            request(server)
+                .patch('/product')
+                .send(updatedProduct)
+                .expect(200)
+                .then(res => {
+                    expect(res.body).to.equal(1);
+
+                    done();
+                })
+                .catch(err => done(err));
+        });
+    });
 });
