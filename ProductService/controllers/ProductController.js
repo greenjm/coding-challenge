@@ -43,7 +43,7 @@ router.get('/find', (req, res) => {
 });
 
 /**
- * Update Product
+ * Update a Product
  */
 router.patch('/', (req, res) => {
     Product.updateOne({
@@ -56,9 +56,25 @@ router.patch('/', (req, res) => {
             return res.status(500).json(err);
         }
         if (updateRes.nModified < 1) {
-            return res.status(404).json({ message: 'Product not found' });
+            return res.status(400).json({ message: 'Product not found' });
         }
         return res.json(updateRes.nModified);
+    });
+});
+
+/**
+ * Delete a Product
+ */
+router.delete('/', (req, res) => {
+    const name = req.query.name;
+    Product.deleteOne({ name }, (err, deleteRes) => {
+        if (err) {
+            return res.status(500).json(err);
+        }
+        if (!deleteRes.ok || deleteRes.deletedCount < 1) {
+            return res.status(400).json({ message: 'Product not deleted' });
+        }
+        return res.json(deleteRes.deletedCount);
     });
 });
 

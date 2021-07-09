@@ -98,7 +98,7 @@ describe('ProductController', () => {
             
             request(server)
                 .get('/product/find')
-                .query({ name: 'product one' })
+                .query({ name: productOne.name })
                 .expect(200)
                 .then(res => {
                     expect(res.body.length).to.equal(1);
@@ -133,6 +133,30 @@ describe('ProductController', () => {
             request(server)
                 .patch('/product')
                 .send(updatedProduct)
+                .expect(200)
+                .then(res => {
+                    expect(res.body).to.equal(1);
+
+                    done();
+                })
+                .catch(err => done(err));
+        });
+    });
+
+    describe('DELETE /product', () => {
+        it('should delete an existing product', (done) => {
+            const product = {
+                name: 'test name',
+                description: 'some description',
+                price: '1.00',
+            };
+            mongoose.model('Product').create([
+                product,
+            ]);
+
+            request(server)
+                .delete('/product')
+                .query({ name: product.name })
                 .expect(200)
                 .then(res => {
                     expect(res.body).to.equal(1);
