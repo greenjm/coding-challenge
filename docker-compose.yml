@@ -11,8 +11,9 @@ services:
             context: .
             dockerfile: ProductService/Dockerfile
         ports:
-            - "3000:3000"
+            - "3000:${PORT}"
         depends_on:
             - mongo
         environment:
             - MONGO_URL=${MONGO_URL}
+            - PORT=${PORT}
