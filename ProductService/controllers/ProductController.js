@@ -29,4 +29,17 @@ router.get('/', (req, res) => {
     });
 });
 
+/**
+ * Get Product by Name
+ */
+router.get('/find', (req, res) => {
+    const name = req.query.name;
+    Product.find({ name }, (err, product) => {
+        if (err) {
+            return res.status(500).json(err);
+        }
+        return res.json(product);
+    });
+});
+
 module.exports = router;

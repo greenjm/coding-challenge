@@ -42,7 +42,6 @@ describe('ProductController', () => {
 
     describe('GET /product', () => {
         it('should return all products', (done) => {
-
             const expectedProductOne = {
                 name: 'product one',
                 description: 'first description',
@@ -59,24 +58,59 @@ describe('ProductController', () => {
             ]);
             
             request(server)
-            .get('/product')
-            .expect(200)
-            .then(res => {
-                expect(res.body.length).to.equal(2);
-                const productOne = res.body[0];
-                const productTwo = res.body[1];
+                .get('/product')
+                .expect(200)
+                .then(res => {
+                    expect(res.body.length).to.equal(2);
+                    const productOne = res.body[0];
+                    const productTwo = res.body[1];
 
-                expect(productOne.name).to.equal(expectedProductOne.name);
-                expect(productOne.description).to.equal(expectedProductOne.description);
-                expect(productOne.price).to.equal(100);
+                    expect(productOne.name).to.equal(expectedProductOne.name);
+                    expect(productOne.description).to.equal(expectedProductOne.description);
+                    expect(productOne.price).to.equal(100);
 
-                expect(productTwo.name).to.equal(expectedProductTwo.name);
-                expect(productTwo.description).to.equal(expectedProductTwo.description);
-                expect(productTwo.price).to.equal(200);
+                    expect(productTwo.name).to.equal(expectedProductTwo.name);
+                    expect(productTwo.description).to.equal(expectedProductTwo.description);
+                    expect(productTwo.price).to.equal(200);
 
-                done();
-            })
-            .catch(err => done(err));
+                    done();
+                })
+                .catch(err => done(err));
+        });
+    });
+
+    describe('GET /product/find', () => {
+        it('should return the correct product', (done) => {
+            const productOne = {
+                name: 'product one',
+                description: 'first description',
+                price: '1.00',
+            };
+            const productTwo = {
+                name: 'product two',
+                description: 'second description',
+                price: '2.00',
+            };
+            mongoose.model('Product').create([
+                productOne,
+                productTwo,
+            ]);
+            
+            request(server)
+                .get('/product/find')
+                .query({ name: 'product one' })
+                .expect(200)
+                .then(res => {
+                    expect(res.body.length).to.equal(1);
+                    const product = res.body[0];
+
+                    expect(product.name).to.equal(productOne.name);
+                    expect(product.description).to.equal(productOne.description);
+                    expect(product.price).to.equal(100);
+
+                    done();
+                })
+                .catch(err => done(err));
         });
     });
 });
