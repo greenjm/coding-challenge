@@ -39,4 +39,44 @@ describe('ProductController', () => {
                 .catch(err => done(err));
         });
     });
+
+    describe('GET /product', () => {
+        it('should return all products', (done) => {
+
+            const expectedProductOne = {
+                name: 'product one',
+                description: 'first description',
+                price: '1.00',
+            };
+            const expectedProductTwo = {
+                name: 'product two',
+                description: 'second description',
+                price: '2.00',
+            };
+            mongoose.model('Product').create([
+                expectedProductOne,
+                expectedProductTwo,
+            ]);
+            
+            request(server)
+            .get('/product')
+            .expect(200)
+            .then(res => {
+                expect(res.body.length).to.equal(2);
+                const productOne = res.body[0];
+                const productTwo = res.body[1];
+
+                expect(productOne.name).to.equal(expectedProductOne.name);
+                expect(productOne.description).to.equal(expectedProductOne.description);
+                expect(productOne.price).to.equal(100);
+
+                expect(productTwo.name).to.equal(expectedProductTwo.name);
+                expect(productTwo.description).to.equal(expectedProductTwo.description);
+                expect(productTwo.price).to.equal(200);
+
+                done();
+            })
+            .catch(err => done(err));
+        });
+    });
 });
