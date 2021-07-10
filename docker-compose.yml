@@ -17,3 +17,10 @@ services:
         environment:
             - MONGO_URL=${MONGO_URL}
             - PORT=${PORT}
+
+    productwebapp:
+        build:
+            context: .
+            dockerfile: ProductWebApp/Dockerfile
+        ports:
+            - "4200:4200"
