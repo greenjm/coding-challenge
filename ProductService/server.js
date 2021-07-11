@@ -1,3 +1,4 @@
+const cors = require('cors');
 const express = require('express');
 const ProductController = require('./controllers/ProductController');
 
@@ -6,6 +7,9 @@ const start = (port) => {
 	require('./db');
 
 	// Middleware
+	app.use(cors({
+		origin: '*',
+	}));
 	app.use(express.json());
 
 	// Controllers
