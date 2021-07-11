@@ -59,10 +59,10 @@ router.patch('/', (req, res) => {
         if (err) {
             return res.status(500).json(err);
         }
-        if (updateRes.nModified < 1) {
+        if (updateRes.n !== 1) {
             return res.status(400).json({ message: 'Product not found' });
         }
-        return res.json(updateRes.nModified);
+        return res.json(updateRes.n);
     });
 });
 
