@@ -24,12 +24,14 @@ Navigate to `http://localhost:4200` in your browser to use the web app.
 ## Run Tests
 Server:
 ```
-cd coding-challenge/ProductService
-npm test
+$> cd coding-challenge/ProductService
+$> npm i ## If not done already
+$> npm test
 ```
 
 WebApp:
 ```
-cd coding-challenge/ProductWebApp
-npm test
+$> cd coding-challenge/ProductWebApp
+$> npm i ## If not done already
+$> npm test
 ```
