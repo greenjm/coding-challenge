@@ -1,6 +1,6 @@
 <div class="edit-product-container">
     <h3>Editing Product: {{productName}}</h3>
-    <form (ngSubmit)="onSubmit()" [formGroup]="editProductForm">          
+    <form *ngIf="!!editProductForm" (ngSubmit)="onSubmit()" [formGroup]="editProductForm">          
           <div class="form-group">
             <label for="description">Description</label>
             <input type="text" class="form-control" id="description"
