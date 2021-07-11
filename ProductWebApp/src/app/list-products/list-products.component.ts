@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Product } from '../models/product.model';
 import { ProductService } from '../services/product.service';
 
@@ -9,8 +10,10 @@ import { ProductService } from '../services/product.service';
 })
 export class ListProductsComponent implements OnInit {
   public products: Product[] = [];
+  public productSearchName: string = '';
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.productService.listProducts()
@@ -26,6 +29,10 @@ export class ListProductsComponent implements OnInit {
           this.products = this.products.filter(p => p.name !== name);
         }
       });
+  }
+
+  searchProducts() {
+    this.router.navigate(['detail'], { queryParams: { name: this.productSearchName } });
   }
 
 }

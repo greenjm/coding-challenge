@@ -39,6 +39,9 @@ router.get('/find', (req, res) => {
         if (err) {
             return res.status(500).json(err);
         }
+        if (!product.length) {
+            return res.status(400).json({ message: 'No product found' });
+        }
         return res.json(product[0].toDisplay());
     });
 });

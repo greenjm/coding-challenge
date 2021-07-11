@@ -5,3 +5,10 @@
     <p>{{product.description}}</p>
     <p>{{product.price}}</p>
 </div>
+
+<div class="product-container" *ngIf="!product">
+    <h3>
+        Product not found.
+        <a routerLink="/list" routerLinkActive="active">Back to list.</a>
+    </h3>
+</div>

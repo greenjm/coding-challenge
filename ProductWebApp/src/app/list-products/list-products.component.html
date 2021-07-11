@@ -1,4 +1,10 @@
 <h1>Products List</h1>
+<form (ngSubmit)="searchProducts()">
+    <label for="productSearchName">Search</label>
+    <input type="text" [(ngModel)]="productSearchName"
+        id="productSearchName" name="productSearchName">
+    <button type="submit">Search</button>
+</form>
 <div class="product-container" *ngFor="let product of products">
     <h4>{{product.name}}</h4>
     <a routerLink="/edit" [queryParams]="{ name: product.name }" routerLinkActive="active">
