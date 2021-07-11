@@ -8,4 +8,12 @@ const ProductSchema = new mongoose.Schema({
     price: { type: Currency, required: true, min: 100, max: 2000000 }
 });
 
+ProductSchema.methods.toDisplay = function() {    
+    return {
+        name: this.name,
+        description: this.description,
+        price: (this.price / 100).toFixed(2),
+    };
+};
+
 module.exports = mongoose.model('Product', ProductSchema);

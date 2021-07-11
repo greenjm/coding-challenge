@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Product = require('../models/Product');
+
 /**
  * Add a new Product
  */
@@ -13,7 +14,7 @@ router.post('/', (req, res) => {
         if (err) {
             return res.status(500).json(err);
         }
-        return res.json(product);
+        return res.json(product.toDisplay());
     });
 });
 
@@ -25,7 +26,7 @@ router.get('/', (req, res) => {
         if (err) {
             return res.status(500).json(err);
         }
-        return res.json(products);
+        return res.json(products.map(p => p.toDisplay()));
     });
 });
 
@@ -38,7 +39,7 @@ router.get('/find', (req, res) => {
         if (err) {
             return res.status(500).json(err);
         }
-        return res.json(product);
+        return res.json(product[0].toDisplay());
     });
 });
 

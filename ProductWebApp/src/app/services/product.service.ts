@@ -19,11 +19,11 @@ export class ProductService {
     return this.http.get<Product[]>(this.BASE_URL);
   }
 
-  getProductDetail(name: string): Observable<Product[]> {
+  getProductDetail(name: string): Observable<Product> {
     let params = new HttpParams();
     params = params.append('name', name);
 
-    return this.http.get<Product[]>(this.BASE_URL + '/find', { params });
+    return this.http.get<Product>(this.BASE_URL + '/find', { params });
   }
 
   deleteProduct(name: string): Observable<number> {

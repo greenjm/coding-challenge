@@ -32,7 +32,7 @@ describe('ProductController', () => {
                 .then(res => {
                     expect(res.body.name).to.equal(product.name);
                     expect(res.body.description).to.equal(product.description);
-                    expect(res.body.price).to.equal(100);
+                    expect(res.body.price).to.equal(product.price);
 
                     done();
                 })
@@ -67,11 +67,11 @@ describe('ProductController', () => {
 
                     expect(productOne.name).to.equal(expectedProductOne.name);
                     expect(productOne.description).to.equal(expectedProductOne.description);
-                    expect(productOne.price).to.equal(100);
+                    expect(productOne.price).to.equal(expectedProductOne.price);
 
                     expect(productTwo.name).to.equal(expectedProductTwo.name);
                     expect(productTwo.description).to.equal(expectedProductTwo.description);
-                    expect(productTwo.price).to.equal(200);
+                    expect(productTwo.price).to.equal(expectedProductTwo.price);
 
                     done();
                 })
@@ -101,12 +101,11 @@ describe('ProductController', () => {
                 .query({ name: productOne.name })
                 .expect(200)
                 .then(res => {
-                    expect(res.body.length).to.equal(1);
-                    const product = res.body[0];
+                    const product = res.body;
 
                     expect(product.name).to.equal(productOne.name);
                     expect(product.description).to.equal(productOne.description);
-                    expect(product.price).to.equal(100);
+                    expect(product.price).to.equal(productOne.price);
 
                     done();
                 })
