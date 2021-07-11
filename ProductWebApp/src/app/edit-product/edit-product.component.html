@@ -1,0 +1,20 @@
+<div class="edit-product-container">
+    <h3>Editing Product: {{productName}}</h3>
+    <form (ngSubmit)="onSubmit()" [formGroup]="editProductForm">          
+          <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" id="description"
+                   formControlName="description" name="description" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="price">Price</label>
+            <input type="text"  class="form-control" id="price"
+                   formControlName="price" name="price" required>
+          </div>
+
+          <button type="submit" class="btn btn-success" [disabled]="!editProductForm.valid">
+              Submit
+          </button>
+    </form>
+</div>

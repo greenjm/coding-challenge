@@ -32,4 +32,8 @@ export class ProductService {
 
     return this.http.delete<number>(this.BASE_URL, { params });
   }
+
+  updateProduct(product: Product): Observable<number> {
+    return this.http.patch<number>(this.BASE_URL, product);
+  }
 }

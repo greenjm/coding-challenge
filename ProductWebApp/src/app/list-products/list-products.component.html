@@ -1,7 +1,9 @@
 <h1>Products List</h1>
 <div class="product-container" *ngFor="let product of products">
     <h4>{{product.name}}</h4>
-    <a href="#">Edit</a>
+    <a routerLink="/edit" [queryParams]="{ name: product.name }" routerLinkActive="active">
+        Edit
+    </a>
     <a routerLink="/detail" [queryParams]="{ name: product.name }" routerLinkActive="active">
         Details
     </a>
