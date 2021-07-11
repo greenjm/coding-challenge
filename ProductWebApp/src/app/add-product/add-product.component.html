@@ -22,4 +22,7 @@
               Submit
           </button>
     </form>
+    <div class="form-error" *ngIf="hasError">
+        <p>An unknown error occurred. Please try again.</p>
+    </div>
 </div>

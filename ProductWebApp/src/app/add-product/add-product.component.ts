@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { Product } from '../models/product.model';
 import { ProductService } from '../services/product.service';
 import { productPriceValidator } from '../validators/productPriceValidator';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-add-product',
@@ -12,6 +14,7 @@ import { productPriceValidator } from '../validators/productPriceValidator';
 })
 export class AddProductComponent implements OnInit {
   public addProductForm!: FormGroup;
+  public hasError: boolean = false;
 
   constructor(private formBuilder: FormBuilder,
     private productService: ProductService,
@@ -30,6 +33,7 @@ export class AddProductComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.hasError = false;
     const product: Product = {
       name: this.addProductForm.get('name')?.value,
       description: this.addProductForm.get('description')?.value,
@@ -37,6 +41,13 @@ export class AddProductComponent implements OnInit {
     };
 
     this.productService.addProduct(product)
+      .pipe(
+        catchError((err) => {
+          this.hasError = true;
+
+          return throwError(err);
+        })
+      )
       .subscribe(p => {
         this.router.navigate(['list']);
       });
