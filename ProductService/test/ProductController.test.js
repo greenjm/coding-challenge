@@ -5,17 +5,17 @@ const request = require('supertest');
 const service = require('../server');
 
 describe('ProductController', () => {
-	let server;
+    let server;
 
-	beforeEach(async () => {
-		server = service.start(5000);
+    beforeEach(async () => {
+        server = service.start(5000);
         await dbHandler.connect();
-	});
+    });
 
-	afterEach(async () => {
+    afterEach(async () => {
         await dbHandler.closeDatabase();
-		await server.close();
-	});
+        await server.close();
+    });
 
     describe('POST /product', () => {
         it('should create a new product', (done) => {
@@ -56,7 +56,7 @@ describe('ProductController', () => {
                 expectedProductOne,
                 expectedProductTwo,
             ]);
-            
+
             request(server)
                 .get('/product')
                 .expect(200)
@@ -95,7 +95,7 @@ describe('ProductController', () => {
                 productOne,
                 productTwo,
             ]);
-            
+
             request(server)
                 .get('/product/find')
                 .query({ name: productOne.name })

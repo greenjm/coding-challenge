@@ -14,7 +14,7 @@ const start = (port) => {
 
 	// Controllers
 	app.use('/product', ProductController);
-	
+
 	const server = app.listen(port, () => {
 		console.log('Product API started on port:', port);
 	});
