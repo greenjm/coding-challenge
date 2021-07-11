@@ -25,4 +25,11 @@ export class ProductService {
 
     return this.http.get<Product[]>(this.BASE_URL + '/find', { params });
   }
+
+  deleteProduct(name: string): Observable<number> {
+    let params = new HttpParams();
+    params = params.append('name', name);
+
+    return this.http.delete<number>(this.BASE_URL, { params });
+  }
 }

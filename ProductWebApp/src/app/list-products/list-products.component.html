@@ -5,4 +5,7 @@
     <a routerLink="/detail" [queryParams]="{ name: product.name }" routerLinkActive="active">
         Details
     </a>
+    <button (click)="deleteProduct(product.name)">
+        Delete
+    </button>
 </div>

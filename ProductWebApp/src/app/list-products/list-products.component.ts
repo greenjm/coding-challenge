@@ -19,4 +19,13 @@ export class ListProductsComponent implements OnInit {
       });
   }
 
+  deleteProduct(name: string) {
+    this.productService.deleteProduct(name)
+      .subscribe(numDeleted => {
+        if (numDeleted === 1) {
+          this.products = this.products.filter(p => p.name !== name);
+        }
+      });
+  }
+
 }
