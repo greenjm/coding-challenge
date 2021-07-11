@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../models/product.model';
 import { ProductService } from '../services/product.service';
+import { productPriceValidator } from '../validators/productPriceValidator';
 
 @Component({
   selector: 'app-edit-product',
@@ -32,7 +33,7 @@ export class EditProductComponent implements OnInit {
   initializeForm(product: Product) {
     this.editProductForm = this.formBuilder.group({
       description: [product.description, [Validators.required, Validators.minLength(5), Validators.maxLength(1000)]],
-      price: [product.price, Validators.required],
+      price: [product.price, [Validators.required, productPriceValidator()]],
     });
   }
 

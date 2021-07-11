@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Product } from '../models/product.model';
 import { ProductService } from '../services/product.service';
+import { productPriceValidator } from '../validators/productPriceValidator';
 
 @Component({
   selector: 'app-add-product',
@@ -20,7 +21,7 @@ export class AddProductComponent implements OnInit {
     this.addProductForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       description: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(1000)]],
-      price: ['', Validators.required],
+      price: ['', [Validators.required, productPriceValidator()]],
     });
   }
 
