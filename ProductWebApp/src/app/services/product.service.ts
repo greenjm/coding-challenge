@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Product } from '../models/product.model';
@@ -17,5 +17,12 @@ export class ProductService {
 
   listProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.BASE_URL);
+  }
+
+  getProductDetail(name: string): Observable<Product[]> {
+    let params = new HttpParams();
+    params = params.append('name', name);
+
+    return this.http.get<Product[]>(this.BASE_URL + '/find', { params });
   }
 }

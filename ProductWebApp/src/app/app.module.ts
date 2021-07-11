@@ -7,23 +7,29 @@ import { AppComponent } from './app.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { ListProductsComponent } from './list-products/list-products.component';
 import { RouterModule, Routes } from '@angular/router';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 const routes: Routes = [
   {
     path: "list",
-    component: ListProductsComponent
+    component: ListProductsComponent,
   },
   {
     path: "create",
-    component: AddProductComponent
+    component: AddProductComponent,
   },
+  {
+    path: "detail",
+    component: ProductDetailComponent,
+  }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     AddProductComponent,
-    ListProductsComponent
+    ListProductsComponent,
+    ProductDetailComponent,
   ],
   imports: [
     BrowserModule,

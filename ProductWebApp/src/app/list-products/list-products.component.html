@@ -2,6 +2,7 @@
 <div class="product-container" *ngFor="let product of products">
     <h4>{{product.name}}</h4>
     <a href="#">Edit</a>
-    <p>{{product.description}}</p>
-    <p>{{product.price}}</p>
+    <a routerLink="/detail" [queryParams]="{ name: product.name }" routerLinkActive="active">
+        Details
+    </a>
 </div>
